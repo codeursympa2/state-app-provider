@@ -1,11 +1,15 @@
 class ProductModel{
 
   final String _name;
-  final int _qt;
+  int _qt=0;
 
-  ProductModel(this._name, this._qt);
+  ProductModel.withoutQt(this._name);
 
   String get name => _name;
 
   int get qt => _qt;
+
+  set qt(int value) {
+    _qt = value;
+  }
 }

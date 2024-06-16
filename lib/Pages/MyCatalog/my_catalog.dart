@@ -1,10 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:state_app/Consts/consts.dart';
 import 'package:state_app/Data/data.dart';
-import 'package:state_app/Models/cart_model.dart';
 import 'package:state_app/Pages/MyCart/my_cart.dart';
+import 'package:state_app/Utils/common_widgets.dart';
 import 'package:state_app/Utils/utils.dart';
 
 class MyCatalog extends StatelessWidget{
@@ -18,7 +17,7 @@ class MyCatalog extends StatelessWidget{
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: const Text("State App with provider"),
+            title: const Text(title),
             actions: [
               IconButton(
                 tooltip: "Voir mon panier",
@@ -40,12 +39,12 @@ class MyCatalog extends StatelessWidget{
               itemBuilder: (BuildContext context, int i) {
                 return Card(
                   child: ListTile(
-                    title: Text('${products[i].name} | ${products[i].qt}'),
-                    trailing: IconButton(onPressed: (){
-                      //Quand on choisit un produit on l'ajoute au panier
+                    title: Text(products[i].name),
+                    trailing: buttonIconFiled(Icons.shopping_cart_checkout_outlined, Colors.blueAccent, (){
+                      //Quand on clique sur un produit on l'ajoute au panier
                       cart.addItem(products[i]);
-                    },
-                      icon: const Icon(Icons.shopping_cart_checkout_outlined),),
+                      showSnackBar(context, "${products[i].name} ajouté(e) au panier.");
+                    }),
                     leading: Text('${i+1}') ,
                   ),
                 );

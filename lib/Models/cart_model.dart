@@ -13,11 +13,17 @@ class CartModel extends ChangeNotifier{
 
   List<ProductModel> get items => _items;
 
+  //Ajout d'un produit dans le panier
   void addItem(ProductModel p){
-    items.insert(0, p);
+    p.qt++;
+    //Si le produit existe on l'ignore on increment seulement la quantité
+    if(!items.contains(p)){
+      items.insert(0, p);
+    }
     notifyListeners(); // Notifie les auditeurs que l'état a changé.
   }
 
+  //Suppression d'un produit dans le panier
   void removeItem(ProductModel p){
     items.remove(p);
     notifyListeners(); // Notifie les auditeurs que l'état a changé.
